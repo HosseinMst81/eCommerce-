@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
-/* ─── Nike Design Tokens ─── */
 :root {
   /* Core Brand */
   --nike-black: #111111;
   --nike-white: #ffffff;
-  --nike-orange: #fa5400;
+  --nike-orange: #d37918;
+  --nike-red: #d33918;
   --nike-volt: #ceff00;
+  --nike-green: #007d48;
 
   /* Grey Scale */
   --nike-grey-50: #fafafa;
@@ -31,19 +32,24 @@
   /* Background & Foreground */
   --background: #ffffff;
   --foreground: #111111;
+
+  --font-jost: 'Jost' , 'sans-serif'
 }
+/* ─── Nike Design Tokens ─── */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-jost: var(--font-jost);
 
   /* Nike Brand Colors */
   --color-nike-black: var(--nike-black);
   --color-nike-white: var(--nike-white);
   --color-nike-orange: var(--nike-orange);
   --color-nike-volt: var(--nike-volt);
+  --color-nike-green: var(--nike-green);
+  --color-nike-red: var(--nike-red);
   --color-nike-sale: var(--nike-sale);
 
   /* Grey Scale */
@@ -57,6 +63,43 @@
   --color-nike-grey-700: var(--nike-grey-700);
   --color-nike-grey-800: var(--nike-grey-800);
   --color-nike-grey-900: var(--nike-grey-900);
+
+  /* Heading sizes */
+  --text-heading-1: 72px;
+  --text-heading-1--line-height: 78px;
+  --text-heading-1--font-weight: 700;
+
+  --text-heading-2: 56px;
+  --text-heading-2--line-height: 60px;
+  --text-heading-2--font-weight: 700;
+
+  --text-heading-3: 24px;
+  --text-heading-3--line-height: 30px;
+  --text-heading-3--font-weight: 500;
+
+  /* Lead */
+  --text-lead: 20px;
+  --text-lead--line-height: 28px;
+  --text-lead--font-weight: 500;
+
+  /* Body */
+  --text-body: 16px;
+  --text-body--line-height: 24px;
+  --text-body--font-weight: 400;
+
+  --text-body-medium: 16px;
+  --text-body-medium--line-height: 24px;
+  --text-body-medium--font-weight: 500;
+
+  /* Caption */
+  --text-caption: 14px;
+  --text-caption--line-height: 20px;
+  --text-caption--font-weight: 500;
+
+  /* Footnote */
+  --text-footnote: 12px;
+  --text-footnote--line-height: 18px;
+  --text-footnote--font-weight: 400;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -69,7 +112,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Jost", Helvetica, Arial, sans-serif;
 }
 
 /* Smooth scrolling */
