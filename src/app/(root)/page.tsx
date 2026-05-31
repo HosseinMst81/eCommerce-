@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { db } from "@/lib/db";
 import { products } from "@/lib/db/schema";
 import { desc } from "drizzle-orm";
@@ -53,12 +54,18 @@ export default async function Home() {
             latest products, inspiration, and member-only benefits.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <button className="rounded-full bg-white px-7 py-3 text-sm font-medium text-nike-black transition-all hover:bg-nike-grey-200">
+            <Link
+              href="/sign-up"
+              className="rounded-full bg-white px-7 py-3 text-sm font-medium text-nike-black transition-all hover:bg-nike-grey-200"
+            >
               Join Us
-            </button>
-            <button className="rounded-full border border-nike-grey-700 px-7 py-3 text-sm font-medium text-white transition-all hover:border-white">
+            </Link>
+            <Link
+              href="/sign-in"
+              className="rounded-full border border-nike-grey-700 px-7 py-3 text-sm font-medium text-white transition-all hover:border-white"
+            >
               Sign In
-            </button>
+            </Link>
           </div>
         </div>
       </section>

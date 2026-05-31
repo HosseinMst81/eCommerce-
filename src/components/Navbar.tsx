@@ -40,7 +40,7 @@ export function Navbar() {
             <Link href="/" className="border-r border-nike-grey-300 pr-3 hover:text-nike-grey-500 transition-colors">
               Help
             </Link>
-            <Link href="/" className="hover:text-nike-grey-500 transition-colors">
+            <Link href="/sign-in" className="hover:text-nike-grey-500 transition-colors">
               Sign In
             </Link>
           </div>
