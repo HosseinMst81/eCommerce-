@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { FiSearch, FiHeart, FiShoppingBag, FiMenu, FiX } from "react-icons/fi";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
+import logo from "../../public/logo-dark.svg";
 import {
   toggleMobileMenu,
   toggleSearch,
   toggleCartDrawer,
 } from "@/lib/store/slices/uiSlice";
+import Image from "next/image";
 
 const navLinks = [
   { label: "New & Featured", href: "/" },
@@ -29,9 +31,7 @@ export function Navbar() {
       <div className="bg-nike-grey-100 px-4 py-2">
         <div className="mx-auto flex max-w-[1920px] items-center justify-between text-xs">
           <div className="flex items-center gap-4">
-            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21 8.719L7.836 14.303C6.74 14.768 5.818 15 5.075 15c-.836 0-1.445-.295-1.819-.884-.485-.76-.273-1.982.559-3.272.494-.754 1.122-1.446 1.734-2.108-.144.234-1.415 2.349-.025 3.345.275.2.666.298 1.147.298.386 0 .829-.063 1.316-.19L21 8.719z" />
-            </svg>
+            
           </div>
           <div className="flex items-center gap-3 font-medium">
             <Link href="/" className="border-r border-nike-grey-300 pr-3 hover:text-nike-grey-500 transition-colors">
@@ -52,9 +52,7 @@ export function Navbar() {
         <div className="mx-auto flex h-16 max-w-[1920px] items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <svg className="h-5 w-16" viewBox="0 0 69 32" fill="currentColor">
-              <path d="M68.56 4L18.4 25.36Q12.16 28 7.92 28q-4.8 0-6.56-3.36-1.36-2.64.56-7.04 1.76-4 5.28-7.96L10.08 14Q7.6 17.84 6.96 20.24q-.8 2.96.96 2.96 1.6 0 5.28-1.56L68.56 4z" />
-            </svg>
+            <Image src={logo} alt="Nike Logo" height={20} />
           </Link>
 
           {/* Desktop Nav Links */}
