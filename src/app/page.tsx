@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { products } from "@/lib/db/schema";
 import { desc } from "drizzle-orm";
 import { HeroBanner } from "@/components/HeroBanner";
+import { LatestShoes } from "@/components/LatestShoes";
 import { ProductGrid } from "@/components/ProductGrid";
 import { CategoryFilter } from "@/components/CategoryFilter";
 
@@ -21,6 +22,8 @@ export default async function Home() {
   return (
     <>
       <HeroBanner />
+
+      <LatestShoes />
 
       {/* Products Section */}
       <section className="mx-auto max-w-[1920px] px-6 py-12 lg:px-10">

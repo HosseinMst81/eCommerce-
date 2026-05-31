@@ -1,9 +1,19 @@
 import Link from "next/link";
+import heroImage from "../../public/hero-bg.png";
+import Image from "next/image";
 
 export function HeroBanner() {
   return (
-    <section className="relative overflow-hidden bg-nike-grey-100">
-      <div className="mx-auto max-w-[1920px] px-6 py-16 sm:py-20 lg:px-10 lg:py-28">
+    <section className="relative overflow-hidden bg-nike-grey-100 z-0">
+      <Image
+        src={heroImage}
+        alt="Hero Image"
+        fill
+        className="object-cover -z-10 absolute"
+        sizes="100vw"
+        priority
+      />
+      <div className="mx-auto z-10 max-w-[1920px] px-6 py-16 sm:py-20 lg:px-10 lg:py-28">
         <div className="flex flex-col items-center text-center">
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-nike-grey-500">
             Nike Running
