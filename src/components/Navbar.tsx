@@ -10,6 +10,7 @@ import {
   toggleCartDrawer,
 } from "@/lib/store/slices/uiSlice";
 import Image from "next/image";
+import { NavbarAuthLinks } from "@/components/NavbarAuthLinks";
 
 const navLinks = [
   { label: "New & Featured", href: "/" },
@@ -26,7 +27,7 @@ export function Navbar() {
   );
 
   return (
-    <header className="sticky top-0 z-[1030] bg-white">
+    <header className="sticky top-0 z-1030 bg-white">
       {/* Top Bar */}
       <div className="bg-nike-grey-100 px-4 py-2">
         <div className="mx-auto flex max-w-[1920px] items-center justify-between text-xs">
@@ -34,15 +35,19 @@ export function Navbar() {
             
           </div>
           <div className="flex items-center gap-3 font-medium">
-            <Link href="/" className="border-r border-nike-grey-300 pr-3 hover:text-nike-grey-500 transition-colors">
+            <Link
+              href="/"
+              className="border-r border-nike-grey-300 pr-3 hover:text-nike-grey-500 transition-colors"
+            >
               Find a Store
             </Link>
-            <Link href="/" className="border-r border-nike-grey-300 pr-3 hover:text-nike-grey-500 transition-colors">
+            <Link
+              href="/"
+              className="border-r border-nike-grey-300 pr-3 hover:text-nike-grey-500 transition-colors"
+            >
               Help
             </Link>
-            <Link href="/sign-in" className="hover:text-nike-grey-500 transition-colors">
-              Sign In
-            </Link>
+            <NavbarAuthLinks />
           </div>
         </div>
       </div>
@@ -51,7 +56,7 @@ export function Navbar() {
       <nav className="border-b border-nike-grey-200 px-4 lg:px-10">
         <div className="mx-auto flex h-16 max-w-[1920px] items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
+          <Link href="/" className="shrink-0">
             <Image src={logo} alt="Nike Logo" height={20} />
           </Link>
 
