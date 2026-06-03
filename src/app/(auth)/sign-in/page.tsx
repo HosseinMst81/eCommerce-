@@ -2,20 +2,39 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AuthForm } from "@/components/AuthForm";
 import { SocialProviders } from "@/components/SocialProviders";
+import { DEFAULT_CALLBACK_URL } from "@/lib/auth/constants";
 
 export const metadata: Metadata = {
   title: "Sign In | Nike Store",
   description: "Sign in to your Nike account to shop the latest products.",
 };
 
-export default function SignInPage() {
+type SignInPageProps = {
+  searchParams: Promise<{ callbackUrl?: string }>;
+};
+
+function resolveCallbackUrl(callbackUrl?: string): string {
+  if (callbackUrl?.startsWith("/") && !callbackUrl.startsWith("//")) {
+    return callbackUrl;
+  }
+  return DEFAULT_CALLBACK_URL;
+}
+
+export default async function SignInPage({ searchParams }: SignInPageProps) {
+  const { callbackUrl } = await searchParams;
+  const redirectTo = resolveCallbackUrl(callbackUrl);
+  const signUpHref =
+    redirectTo === DEFAULT_CALLBACK_URL
+      ? "/sign-up"
+      : `/sign-up?callbackUrl=${encodeURIComponent(redirectTo)}`;
+
   return (
     <>
       <div className="mb-8 flex justify-start">
         <p className="text-caption text-nike-grey-600">
           Don&apos;t have an account?{" "}
           <Link
-            href="/sign-up"
+            href={signUpHref}
             className="font-medium text-nike-black underline underline-offset-2"
           >
             Sign Up
@@ -43,7 +62,7 @@ export default function SignInPage() {
         </p>
       </div>
 
-      <AuthForm mode="sign-in" />
+      <AuthForm mode="sign-in" callbackUrl={redirectTo} />
     </>
   );
 }
