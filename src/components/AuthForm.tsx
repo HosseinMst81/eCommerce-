@@ -1,13 +1,19 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useActionState, useId, useState } from "react";
 import Link from "next/link";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import {
+  signIn,
+  signUp,
+  type AuthActionState,
+} from "@/lib/auth/actions";
 
 export type AuthFormMode = "sign-in" | "sign-up";
 
 interface AuthFormProps {
   mode: AuthFormMode;
+  callbackUrl?: string;
 }
 
 const copy = {
@@ -25,20 +31,35 @@ const copy = {
   },
 } as const;
 
-export function AuthForm({ mode }: AuthFormProps) {
+export function AuthForm({ mode, callbackUrl = "/" }: AuthFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const formId = useId();
   const text = copy[mode];
+  const action = mode === "sign-in" ? signIn : signUp;
+  const [state, formAction, isPending] = useActionState<
+    AuthActionState | null,
+    FormData
+  >(action, null);
 
   return (
-    <form
-      className="flex flex-col gap-5"
-      onSubmit={(e) => e.preventDefault()}
-      noValidate
-    >
+    <form className="flex flex-col gap-5" action={formAction} noValidate>
+      <input type="hidden" name="callbackUrl" value={callbackUrl} />
+
+      {state?.error && (
+        <p
+          role="alert"
+          className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-footnote text-red-700"
+        >
+          {state.error}
+        </p>
+      )}
+
       {mode === "sign-up" && (
         <div className="flex flex-col gap-2">
-          <label htmlFor={`${formId}-name`} className="text-caption text-nike-black">
+          <label
+            htmlFor={`${formId}-name`}
+            className="text-caption text-nike-black"
+          >
             Full Name
           </label>
           <input
@@ -54,7 +75,10 @@ export function AuthForm({ mode }: AuthFormProps) {
       )}
 
       <div className="flex flex-col gap-2">
-        <label htmlFor={`${formId}-email`} className="text-caption text-nike-black">
+        <label
+          htmlFor={`${formId}-email`}
+          className="text-caption text-nike-black"
+        >
           Email
         </label>
         <input
@@ -90,7 +114,9 @@ export function AuthForm({ mode }: AuthFormProps) {
             id={`${formId}-password`}
             name="password"
             type={showPassword ? "text" : "password"}
-            autoComplete={mode === "sign-in" ? "current-password" : "new-password"}
+            autoComplete={
+              mode === "sign-in" ? "current-password" : "new-password"
+            }
             required
             minLength={8}
             placeholder={text.passwordPlaceholder}
@@ -115,19 +141,26 @@ export function AuthForm({ mode }: AuthFormProps) {
 
       <button
         type="submit"
-        className="mt-1 h-12 w-full rounded-full bg-nike-black text-body-medium text-white transition-colors hover:bg-nike-grey-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nike-black"
+        disabled={isPending}
+        className="mt-1 h-12 w-full rounded-full bg-nike-black text-body-medium text-white transition-colors hover:bg-nike-grey-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nike-black disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {text.submit}
+        {isPending ? "Please wait…" : text.submit}
       </button>
 
       {mode === "sign-up" && (
         <p className="text-center text-footnote text-nike-grey-500">
           By signing up, you agree to our{" "}
-          <Link href="#" className="text-nike-black underline underline-offset-2">
+          <Link
+            href="#"
+            className="text-nike-black underline underline-offset-2"
+          >
             Terms of Service
           </Link>{" "}
           and{" "}
-          <Link href="#" className="text-nike-black underline underline-offset-2">
+          <Link
+            href="#"
+            className="text-nike-black underline underline-offset-2"
+          >
             Privacy Policy
           </Link>
           .
